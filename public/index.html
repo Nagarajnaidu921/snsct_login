@@ -1,9 +1,51 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title></title>
+	<title>SNSCT results</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="icon" type="image/jpeg" href="image/favicon.jpg">
+	<link rel="icon" type="image/png" href="image/favicon.png">
+	<script src="js/lib/angular.min.js"></script>
+	<script src="js/lib/angular-route.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="css/lib/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="css/lib/font-awesome.min.css">
+	<script src="js/lib/jquery.min.js"></script>
+	<script src="js/lib/bootstrap.min.js"></script>
+	<script src="js/app.js"></script>
+	<script src="js/service/user.js"></script>
+	<script src="js/controllers/main.js"></script>
+	<script src="js/controllers/loginctrl.js"></script>
+
 </head>
-<body>
-my login
+<body ng-app="myApp" >
+<div class="container">
+<div class="panel-heading">
+		<h1 class="text-center">login</h1>
+	</div>
+<div class="row">
+	<div class="col-sm-offset-4 col-sm-4">
+		<form name="loginform"  ng-controller="loginCtrl" ng-submit="login()">
+			<div class="form-group">
+				<div class="input-group">
+					<span class="input-group-addon"><i class="fa fa-id-card fa"></i></span>
+					<input type="text" name="id" class="form-control" placeholder="Enter Register Number" ng-model="user.regNum" required ng-pattern="regNumPattern">
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="input-group">
+					<span class="input-group-addon"><i class="fa fa-key fa"></i></span>
+					<input type="password" name="password" class="form-control" placeholder="Enter Password" ng-model="user.password" required>
+				</div>
+			</div>
+			<div class="alert alert-danger" ng-show="statusMsg">
+				&nbsp;&nbsp;{{statusMsg}}
+				</div>
+			<div class="form-group">
+				<button type="submit" name="login" class="btn btn-primary btn-lg btn-block"><i class="fa fa-sign-in fa"></i> &nbsp;login</button>
+			</div>
+		</form>
+	</div>
+</div>
+</div>
 </body>
 </html>
