@@ -4,6 +4,7 @@
 	.controller('loginCtrl', ['$scope', '$timeout', 'User', loginCtrl]);
 	function loginCtrl($scope, $timeout, User) {
 		$scope.login = function() {
+			$scope.regNumPattern = /[1-9][1-9](au|ae|ag|bm|ce|cp|cs|ee|ei|ec|it|mc|me|ma)[0-9][0-9][0-9]/gm;
 			var data = {reg:  $scope.user.regNum, pwd: $scope.user.password}; 
 			console.log(data);
 			User.authenticate(data)
