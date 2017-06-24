@@ -8,7 +8,7 @@ step 3: run npm install
 
 step 4: open server.js file and uncomment the code
 
-step 5: run "node server.js"
+step 5: run "node server.js"(it will create the mongoDb: "tester" collection: "userdatas" with smaple data automatically)
 
 step 6: again open "server.js" 
 
