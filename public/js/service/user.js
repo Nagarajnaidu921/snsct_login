@@ -1,5 +1,8 @@
 'use strict';
-function genObjForNotFy(Data) {
+(function(){
+	angular.module('myApp')
+	.factory('User', ['$http', '$window', User]);
+	function genObjForNotFy(Data) {
 			var ObjForNotFy = {
 				message: Data.msg,
 				isSuccess: Data.isSuccess
@@ -14,9 +17,6 @@ function genObjForNotFy(Data) {
 				return ObjForNotFy;
 			}
 		}
-(function(){
-	angular.module('myApp')
-	.factory('User', ['$http', '$window', User]);
 	function User($http, $window) {
 		function authenticate(data){
 			if(data.reg && data.pwd){
@@ -25,6 +25,7 @@ function genObjForNotFy(Data) {
 				.then(function(res){
 					console.log(res.data);
 					if(res.data.isSuccess){
+						console.log(res.data);
 						return  genObjForNotFy(res.data);
 					}else
 					if(!res.data.isSuccess){
