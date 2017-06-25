@@ -1,35 +1,20 @@
 'use strict';
 (function(){
 	angular.module('myApp')
-	.factory('User', ['$http', '$window', User]);
-	function genObjForNotFy(Data) {
-			var ObjForNotFy = {
-				message: Data.msg,
-				isSuccess: Data.isSuccess
-			}
-			if (Data.isSuccess) {
-				ObjForNotFy.colorClass = 'success';
-				ObjForNotFy.data = Data.data;
-				return ObjForNotFy;
-			}
-			else {
-				ObjForNotFy.colorClass = 'error';
-				return ObjForNotFy;
-			}
-		}
-	function User($http, $window) {
+	.factory('User', ['$http', User]);
+	function User($http) {
 		function authenticate(data){
 			if(data.reg && data.pwd){
-				console.log(data);
+				// console.log(data);
 				return $http.post('/user/login', data)
 				.then(function(res){
-					console.log(res.data);
-					if(res.data.isSuccess){
-						console.log(res.data);
-						return  genObjForNotFy(res.data);
+					var data = res.data;
+					console.log(data);
+					if(data.isSuccess){
+						return  data;
 					}else
-					if(!res.data.isSuccess){
-						return  genObjForNotFy(res.data);
+					if(!data.isSuccess){
+						return  data;
 					}
 				});
 			}

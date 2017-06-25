@@ -6,7 +6,7 @@ const bcrypt   = require('bcrypt');
 const router   = express.Router();
 function resGen(message, isSuccess) {
 	var resData = {
-		msg: message,
+		messasge: message,
 		isSuccess: isSuccess
 	};
 	return resData;
@@ -25,14 +25,16 @@ router.route('/login')
 		if(data){
 			bcrypt.compare(req.body.pwd, data.password, function(err, isSame) {
 				if(isSame){
-					console.log(data);
 					resData = resGen("username matched with password", true);
+					resData.id = data._id;
+					resData.regNum = data.regNum;
+					resData.name = data.name;
+					resData.email = data.email;
 					var token = jwt.sign({regNum: data.regNum, email: data.email},'nagaraj', { algorithm: 'HS512'});
-					resData.data = {id: data._id, name: data.name, email: data.email, token: token};
+					resData.token = token.toString();
 					res.json(resData);
 				}else
 				if(!isSame) {
-					console.log("password mismatch");
 					resData = resGen("invalid username or password", false);
 					res.json(resData);
 				}
@@ -45,8 +47,8 @@ router.route('/login')
 
 router.route('/authenticate')
 .post(function(req, res){
-	// console.log(req.body); 
-	jwt.verify(req.body.data, 'nagaraj', function(err, decode){
+	var body = req.body; 
+	jwt.verify(body.data, 'nagaraj', function(err, decode){
 		if(err){
 			console.log(err);
 			res.json(resGen("failed to authenticate token", false ));
@@ -54,8 +56,7 @@ router.route('/authenticate')
 		if(decode){
 		res.json(resGen("successfully authenticated", true ));	
 		}
-	})
-	console.log(req.body);
+	});
 });
 
 module.exports = router;
