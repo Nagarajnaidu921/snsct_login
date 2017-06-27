@@ -24,6 +24,7 @@
 				console.log(data);
 				User.authenticate(data)
 				.then(function(res){
+					console.log(res);
 					if(res.isSuccess == false){
 						$scope.statusMsg = res.message;
 						$timeout(function(){$scope.statusMsg ="";}, 6000);
